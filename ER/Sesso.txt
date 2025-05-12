@@ -1,0 +1,13 @@
+12/05
+
+TO DO -->
+    - UTENTE: definire la entità UTENTE_REGISTRATO e aggiustare la gerarchia
+    - PRESENZA (UTENTE): singolo(junior/senior) e gruppo
+    - TOUR: aggiungere data e ora
+    - Switch tour e guida: cambia posizione e collega UTENTE_REGISTRATO a TOUR
+    - *Trasformare PRENOTAZIONE (albergo) in una tabella (n,n: es. stato)
+    - Relazione scritta: mettere la considerazione che il feed può essere anonimo, oppure l'UTENTE si è cancellato
+
+COSE GIUSTE -->
+    - il resto (gestione tour, calendario, tragitti, albergo*, ente, parco)
+    - DAYUMMMM
