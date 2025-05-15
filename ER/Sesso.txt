@@ -6,8 +6,34 @@ TO DO -->
     -- TOUR: aggiungere data e ora
     -- Switch tour e guida: cambia posizione e collega UTENTE_REGISTRATO a TOUR
     -- *Trasformare PRENOTAZIONE (albergo) in una tabella (n,n: es. stato)
-    - Relazione scritta: mettere la considerazione che il feed può essere anonimo, oppure l'UTENTE si è cancellato
+
+DA AGGIUNGERE ALLA RELAZIONE -->
+    - mettere la considerazione che il feed può essere anonimo, oppure l'UTENTE si è cancellato
+    - aggiungere considerazione sul fatto che centro visita per noi è INUTILE (i dati sono reperibili dalle varie entità presenti)
+    - UTENTE si riferisce solamente al tour prenotato, .., invece persona può prenotare
 
 COSE GIUSTE -->
     - il resto (gestione tour, calendario, tragitti, albergo*, ente, parco)
     - DAYUMMMM
+
+COSE DA CHIEDERE -->
+    - attributo "segnaletica" in TRAGITTI (se è utile)
+
+--------------------------------------------------------------------------------------------------------------------------------------------
+
+15/05
+
+TO DO -->
+    - Correggere e sistemare gli attributi, aggingendo se è necessario degli altri
+    - Confrontare con i requisiti della checklist
+    - iniziare a scrivere i br
+    - fare il resto
+
+DA AGGIUNGERE ALLA RELAZIONE -->
+    - mettere la considerazione che il feed può essere anonimo, oppure l'UTENTE si è cancellato
+    - aggiungere considerazione sul fatto che centro visita per noi è INUTILE (i dati sono reperibili dalle varie entità presenti)
+    - UTENTE si riferisce solamente al tour prenotato, .., invece persona può prenotare
+
+COSE GIUSTE -->
+    - w8iamo il prof
+    - bbno$ leak concert?!?
