@@ -35,5 +35,6 @@ DA AGGIUNGERE ALLA RELAZIONE -->
     - UTENTE si riferisce solamente al tour prenotato, .., invece persona può prenotare
 
 COSE GIUSTE -->
-    - w8iamo il prof
+    - Il prof ha detto che è a posto.
+    - Schema ER COMPLETATO
     - bbno$ leak concert?!?
