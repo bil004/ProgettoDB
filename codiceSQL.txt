@@ -1,0 +1,95 @@
+create table Persona (
+    COD_fiscale char(16),
+    cognome varchar(20),
+    nome varchar(20),
+    dataNascita date,
+    constraint Persona_PK primary key(COD_fiscale)
+);
+
+create table Parco (
+    Nome varchar(40),
+    descrizione text,
+    superficie int,
+    regione varchar(20),
+    accessibile boolean,
+    tipo varchar(40),
+    constraint Parco_PK primary key(Parco)
+);
+
+create table Ente (
+    Nome varchar(20),
+    CETS boolean,
+    constraint Ente_PK primary key(Parco)
+)
+
+create table News (
+    data date,
+    titolo varchar(20),
+    testo text,
+    autore varchar(100),
+    foto bytea,
+    constraint News_PK primary key(data, titolo)
+)
+
+create table Struttura_ricettiva (
+    via varchar(10),
+    cap int,
+    numCivico int,
+    nome varchar(40),
+    contatti varchar(30),
+    parcheggio boolean,
+    trattamenti varchar(30),
+    servizi varchar(30),
+    impegno_ecologico boolean default false,   --> ho messo di default false per indicare il valore opzionale
+    constraint Sr_PK primary key(via, cap, numCivico)
+);
+
+create table Gruppo (
+    ID int,
+    tipo varchar(20),
+    totPartecipanti int by default 0,
+    constraint Gruppo_PK primary key(ID)
+);
+
+create table Utente (
+    username varchar(20),
+    password varchar(20),
+    constraint Utente_PK primary key(username)
+);
+
+create table Feedback (
+    data date,
+    ora time,
+    tipo varchar(20),
+    valutazione int check (voto between 1 and 5),
+    commento text,
+    constraint Feedback_PK primary key(data, ora)
+);
+
+create table Tragitti (
+    nome varchar(20),
+    durata time,
+    punto_partenza varchar(20),
+    difficolta int check (difficolta between 1 and 10),
+    descrizione text,
+    constraint Tragitti_PK primary key(nome)
+);
+
+create table Guida (
+    cod int,
+    voto int check (between 1 and 5),
+    cognome varchar(20),
+    nome varchar(20),
+    dataNascita date,
+    licenza varchar(20),
+    campo varchar(20),
+    constraint Guida_PK primary key(cod)
+);
+
+create table Calendario (
+    idCalendario int,
+    oraInizio time,
+    oraFine time,
+    data date,
+    constraint Calendario_PK primary key(idCalendario)
+);
