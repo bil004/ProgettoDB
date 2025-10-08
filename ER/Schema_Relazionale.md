@@ -72,4 +72,3 @@ RISERVARE(**codFiscale(pk)**, **idStruttura(pk)**, **dataPrenotazione(pk)**, num
 
 APPARTIENE_A(**codFiscale(pk)**, **idGruppo(pk)**)
 - FK: codFiscale → PERSONA(codFiscale), idGruppo → GRUPPO(idGruppo)
-
