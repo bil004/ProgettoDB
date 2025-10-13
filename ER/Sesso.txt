@@ -1,19 +1,18 @@
-12/05
-
 TO DO -->
-    - UTENTE: definire la entità UTENTE_REGISTRATO e aggiustare la gerarchia
-    - PRESENZA (UTENTE): singolo(junior/senior) e gruppo
-    -- TOUR: aggiungere data e ora
-    -- Switch tour e guida: cambia posizione e collega UTENTE_REGISTRATO a TOUR
-    -- *Trasformare PRENOTAZIONE (albergo) in una tabella (n,n: es. stato)
+    - Sistemare la parte dello schema relazionale (fk,...)
+    - Business rules (ER, schema logico, SQL)
+    - correggere codiceSQL.txt
+    - SQL
 
 DA AGGIUNGERE ALLA RELAZIONE -->
     - mettere la considerazione che il feed può essere anonimo, oppure l'UTENTE si è cancellato
     - aggiungere considerazione sul fatto che centro visita per noi è INUTILE (i dati sono reperibili dalle varie entità presenti)
     - UTENTE si riferisce solamente al tour prenotato, .., invece persona può prenotare
 
-COSE GIUSTE -->
+COSE FATTE BENE -->
     - il resto (gestione tour, calendario, tragitti, albergo*, ente, parco)
+    - Gestione delle ridondanze ✅
+    - schema relazionale più o meno
     - DAYUMMMM
 
 COSE DA CHIEDERE -->
