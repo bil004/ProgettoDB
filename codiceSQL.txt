@@ -3,23 +3,24 @@ create table Persona (
     cognome varchar(20),
     nome varchar(20),
     dataNascita date,
+    tipo varchar(20),
     constraint Persona_PK primary key(COD_fiscale)
 );
 
 create table Parco (
-    Nome varchar(40),
+    nomeParco varchar(40),
     descrizione text,
     superficie int,
     regione varchar(20),
-    accessibile boolean,
+    accessibile boolean default true,
     tipo varchar(40),
-    constraint Parco_PK primary key(Parco)
+    constraint Parco_PK primary key(nomeParco)
 );
 
 create table Ente (
-    Nome varchar(20),
+    nomeEnte varchar(20),
     CETS boolean,
-    constraint Ente_PK primary key(Parco)
+    constraint Ente_PK primary key(nomeEnte)
 )
 
 create table News (
@@ -32,28 +33,32 @@ create table News (
 )
 
 create table Struttura_ricettiva (
-    via varchar(10),
+    via varchar(20),
     cap int,
     numCivico int,
     nome varchar(40),
     contatti varchar(30),
     parcheggio boolean,
+    CETS boolean by default false,
     trattamenti varchar(30),
     servizi varchar(30),
-    impegno_ecologico boolean default false,   --> ho messo di default false per indicare il valore opzionale
+    impegno_ecologico boolean default false,
     constraint Sr_PK primary key(via, cap, numCivico)
 );
 
 create table Gruppo (
-    ID int,
+    nomeGruppo varchar(20),
     tipo varchar(20),
-    totPartecipanti int by default 0,
-    constraint Gruppo_PK primary key(ID)
+    totPartecipanti int,
+    classe char(2) by default null,
+    constraint Gruppo_PK primary key(nomeGruppo)
 );
 
 create table Utente (
     username varchar(20),
     password varchar(20),
+    email varchar(40),
+    telefono varchar(9),
     constraint Utente_PK primary key(username)
 );
 
@@ -118,15 +123,15 @@ create table Centro_visita (
 );
 
 create table Riservare (
-    codFiscale char(16) not null,
+    COD_fiscale char(16) not null,
     via varchar(10) not null,
     cap int not null,
     numCivico int not null,
     dataPrenotazione date not null,
     numStanze int,
     stato text,
-    constraint Riservare_PK primary key(codFiscale, via, cap, numCivico, dataPrenotazione),
-    constraint Riservare_fk_persona foreign key(codFiscale) references Persona(COD_fiscale),
+    constraint Riservare_PK primary key(COD_fiscale, via, cap, numCivico, dataPrenotazione),
+    constraint Riservare_fk_persona foreign key(COD_fiscale) references Persona(COD_fiscale),
     constraint Riservare_fk_struttura foreign key(via, cap, numCivico) references Struttura_ricettiva(via, cap, numCivico)
 );
 
@@ -152,3 +157,14 @@ create table Esprime (
     constraint Utente_FK foreign key(username) references Utente(username),
     constraint Feedback_FK foreign key(data, ora) references Feedback(data, ora)
 );
+
+create table Visita(
+    nomeParco varchar(20),
+    COD_fiscale char(16),
+    data date,
+    oraInizio time,
+    oraFine time,
+    constraint Visita_PK primary key(nomeParco, COD_fiscale),
+    constraint Persona_FK foreign key(COD_fiscale) references Persona(COD_fiscale),
+    constraint Parco_FK foreign key(nomeParco) references Parco(nomeParco)
+)

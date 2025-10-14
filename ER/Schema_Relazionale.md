@@ -16,7 +16,7 @@ Utente(**username(pk)**, password, email, telefono)
 
 Tour(**nomeTour(pk)**, maxPartecipanti, data, ora, stato)
 
-Feedback(**idFeedback(pk)**, tipo, valutazione, commento, data, ora, autore, )
+Feedback(**idFeedback(pk)**, tipo, valutazione, commento, data, ora, autore)
 
 Calendario(**idCalendario(pk)**, data, oraInizio, oraFine, note)
 
@@ -28,10 +28,10 @@ Tragitto(**idTragitto(pk)**, durata, nomeTragitto, punto_partenza, difficolta, d
 
 -- Relazioni di associazione (logico)
 
-VISITA(**nomeParco(pk)**, **COD_fiscale(pk)**, data, oraInizio, oraFine, entrate)
+Visita(**nomeParco(pk)**, **COD_fiscale(pk)**, data, oraInizio, oraFine)
 
-ESPRIME(**username(pk)**, **idFeedback(pk)**, anonimo)
+Esprime(**username(pk)**, **idFeedback(pk)**, anonimo)
 
-PRENOTA(**username(pk)**, **nomeTour(pk)**, stato, dataPrenotazione, giorniDisponibili, orario)
+Prenota(**username(pk)**, **nomeTour(pk)**, stato, dataPrenotazione, giorniDisponibili, orario)
 
-RISERVARE(**COD_fiscale(pk)**, **nome(pk)**, **dataPrenotazione(pk)**, numPersone, stato)
+Riservare(**COD_fiscale(pk)**, **nome(pk)**, **dataPrenotazione(pk)**, numPersone, stato)
