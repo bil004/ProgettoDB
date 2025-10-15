@@ -1,9 +1,11 @@
 TO DO -->
     - Sistemare la parte dello schema relazionale (fk,...)
+    - Sistema l'errore nella parte SQL (tragitti)
     - Business rules (ER, schema logico, SQL)
     - correggere codiceSQL.txt
-    - SQL
-
+    - controllare che le varie cose siano giuste (SQL, schema ER, schema logico)
+    - Relazione bella
+    
 DA AGGIUNGERE ALLA RELAZIONE -->
     - mettere la considerazione che il feed può essere anonimo, oppure l'UTENTE si è cancellato
     - aggiungere considerazione sul fatto che centro visita per noi è INUTILE (i dati sono reperibili dalle varie entità presenti)
