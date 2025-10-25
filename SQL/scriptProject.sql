@@ -1,5 +1,3 @@
-create database Progetto_2024_2025;
-
 create table Persona (
     COD_fiscale char(16),
     cognome varchar(20),
@@ -62,8 +60,8 @@ create table Utente (
     email varchar(40),
     telefono varchar(9),
     COD_fiscale char(16),
-    constraint COD_fiscale_FK foreign key(COD_fiscale) references Persona(COD_fiscale),
-    constraint Utente_PK primary key(username)
+    constraint Utente_PK primary key(username),
+    constraint Utente_CODfiscale_FK foreign key(COD_fiscale) references Persona(COD_fiscale)
 );
 
 create table Tragitti (
@@ -72,7 +70,7 @@ create table Tragitti (
     punto_partenza varchar(20),
     difficolta int check (difficolta between 1 and 10),
     descrizione text,
-	tipo varchar(10),
+    tipo varchar(10),
     constraint Tragitti_PK primary key(nomeTragitto)
 );
 
@@ -84,14 +82,14 @@ create table Feedback (
     valutazione int check (valutazione between 1 and 5),
     commento text,
     anonimo boolean default false,
-    username varchar(20) default NULL,
-    constraint Feedback_nomeTragitto_FK foreign key(nomeTragitto) references Tragitti(nomeTragitto),
-    constraint checkAnonimo check (
-        (anonimo = true  and username is null)
+    username varchar(20) default null,
+    constraint Feedback_PK primary key(data, ora, nomeTragitto),
+    constraint Feedback_Tragitto_FK foreign key(nomeTragitto) references Tragitti(nomeTragitto),
+    constraint Feedback_Anonimo_check check (
+        (anonimo = true and username is null)
         or
         (anonimo = false and username is not null)
-    ),
-    constraint Feedback_PK primary key(data, ora, nomeTragitto)
+    )
 );
 
 create table Guida (
@@ -104,12 +102,12 @@ create table Guida (
 
 create table Calendario (
     numTesserino int,
-	oraInizio time,
+    oraInizio time,
     oraFine time,
     data date,
-	note text,
-	constraint numTesserino_FK foreign key(numTesserino) references Guida(numTesserino),
-    constraint Calendario_PK primary key(numTesserino, oraInizio, oraFine, data)
+    note text,
+    constraint Calendario_PK primary key(numTesserino, oraInizio, oraFine, data),
+    constraint Calendario_Guida_FK foreign key(numTesserino) references Guida(numTesserino)
 );
 
 create table Tour (
@@ -139,97 +137,116 @@ create table Esprime (
     username varchar(20),
     data date,
     ora time,
+    nomeTragitto varchar(20),
     anonimo boolean default false,
-    constraint Esprime_PK primary key(username, data, ora),
-    constraint Utente_FK foreign key(username) references Utente(username),
-    constraint Feedback_FK foreign key(data, ora) references Feedback(data, ora)
+    constraint Esprime_PK primary key(username, data, ora, nomeTragitto),
+    constraint Esprime_Utente_FK foreign key(username) references Utente(username),
+    constraint Esprime_Feedback_FK foreign key(data, ora, nomeTragitto)
+        references Feedback(data, ora, nomeTragitto)
 );
 
+
 create table Visita(
-    nomeParco varchar(20),
+    nomeParco varchar(40),
     COD_fiscale char(16),
     data date,
     oraInizio time,
     oraFine time,
     constraint Visita_PK primary key(nomeParco, COD_fiscale),
-    constraint Persona_FK foreign key(COD_fiscale) references Persona(COD_fiscale),
-    constraint Parco_FK foreign key(nomeParco) references Parco(nomeParco)
+    constraint Visita_Persona_FK foreign key(COD_fiscale) references Persona(COD_fiscale),
+    constraint Visita_Parco_FK foreign key(nomeParco) references Parco(nomeParco)
 );
 
 create table Assegnata_a (
-	nomeTour varchar(20),
-	numTesserino int,
-	constraint Assegnata_a_PK primary key(nomeTour, numTesserino),
-	constraint Tour_FK foreign key(nomeTour) references Tour(nomeTour),
-	constraint Guida_FK foreign key(numTesserino) references Guida(numTesserino)
+    nomeTour varchar(20),
+    numTesserino int,
+    constraint Assegnata_a_PK primary key(nomeTour, numTesserino),
+    constraint Assegnata_Tour_FK foreign key(nomeTour) references Tour(nomeTour),
+    constraint Assegnata_Guida_FK foreign key(numTesserino) references Guida(numTesserino)
 );
 
 create table Relativo_a (
-	data date,
-	ora time,
-	nomeTragitto varchar(20) foreign key(nomeTragitto) references Tragitti(nomeTragitto),
-	numTesserino int,
-	constraint Relativo_a primary key(nomeTour, numTesserino),
-	constraint Tour_FK foreign key(nomeTour) references Tour(nomeTour),
-	constraint Guida_FK foreign key(numTesserino) references Guida(numTesserino)
+    nomeTour varchar(20),
+    numTesserino int,
+    data date,
+    ora time,
+    nomeTragitto varchar(20),
+    constraint Relativo_a_PK primary key(nomeTour, numTesserino),
+    constraint Relativo_Tour_FK foreign key(nomeTour) references Tour(nomeTour),
+    constraint Relativo_Guida_FK foreign key(numTesserino) references Guida(numTesserino),
+    constraint Relativo_Tragitto_FK foreign key(nomeTragitto) references Tragitti(nomeTragitto)
 );
 
 create table Svolge (
-	nomeTragitto varchar(20) foreign key(nomeTragitto) references Tragitti(nomeTragitto),
-	numTesserino int foreign key(numTesserino) references Guida(numTesserino),
-	constraint Svolge_PK primary key(nomeTragitto, numTesserino),
+    nomeTragitto varchar(20),
+    numTesserino int,
+    constraint Svolge_PK primary key(nomeTragitto, numTesserino),
+    constraint Svolge_Tragitto_FK foreign key(nomeTragitto) references Tragitti(nomeTragitto),
+    constraint Svolge_Guida_FK foreign key(numTesserino) references Guida(numTesserino)
 );
 
 create table Include (
-    nomeTragitto varchar(20) foreign key(nomeTragitto) references Tragitti(nomeTragitto),
-	nomeTour varchar(20) foreign key(nomeTour) references Tour(nomeTour),
-	constraint Svolge_PK primary key(nomeTragitto, nomeTour),
-); 
+    nomeTragitto varchar(20),
+    nomeTour varchar(20),
+    constraint Include_PK primary key(nomeTragitto, nomeTour),
+    constraint Include_Tragitto_FK foreign key(nomeTragitto) references Tragitti(nomeTragitto),
+    constraint Include_Tour_FK foreign key(nomeTour) references Tour(nomeTour)
+);
 
 create table Prenota (
-    username varchar(20) foreign key(username) references Utente(username),
-    nomeTour varchar(20) foreign key(nomeTour) references Tour(nomeTour),
+    username varchar(20),
+    nomeTour varchar(20),
     stato text,
     disponibile boolean,
     giornoDisponibile date,
     orario time,
     data date,
-    constraint Prenota_PK primary key(username, nomeTour)
+    constraint Prenota_PK primary key(username, nomeTour),
+    constraint Prenota_Utente_FK foreign key(username) references Utente(username),
+    constraint Prenota_Tour_FK foreign key(nomeTour) references Tour(nomeTour)
 );
 
 create table Si_rivolge_a (
-    COD_fiscale char(16) foreign key(COD_fiscale) references Persona(COD_fiscale),
-    nomeCentro char(20) foreign key(nomeCentro) references Centro_visita(nomeCentro),
-    constraint Si_rivolge_a_PK primary key(COD_fiscale, nomeCentro)
+    COD_fiscale char(16),
+    nomeCentro varchar(20),
+    constraint Si_rivolge_a_PK primary key(COD_fiscale, nomeCentro),
+    constraint Si_rivolge_a_Persona_FK foreign key(COD_fiscale) references Persona(COD_fiscale),
+    constraint Si_rivolge_a_Centro_FK foreign key(nomeCentro) references Centro_visita(nomeCentro)
 );
 
 create table Si_riferisce_a (
-    nomeParco varchar(20) foreign key(nomeParco) references Parco(nomeParco),
-    nomeCentro char(20) foreign key(nomeCentro) references Centro_visita(nomeCentro),
-    constraint Si_riferisce_a_PK primary key(nomeParco, nomeCentro)
+    nomeParco varchar(40),
+    nomeCentro varchar(20),
+    constraint Si_riferisce_a_PK primary key(nomeParco, nomeCentro),
+    constraint Si_riferisce_a_Parco_FK foreign key(nomeParco) references Parco(nomeParco),
+    constraint Si_riferisce_a_Centro_FK foreign key(nomeCentro) references Centro_visita(nomeCentro)
 );
 
 create table Gestione(
-    nomeParco varchar(20) foreign key(nomeParco) references Parco(nomeParco),
-    nomeEnte varchar(20) foreign key(nomeEnte) references Ente(nomeEnte),
-    constraint Gestione_PK primary key(nomeParco, nomeEnte)
+    nomeParco varchar(40),
+    nomeEnte varchar(20),
+    constraint Gestione_PK primary key(nomeParco, nomeEnte),
+    constraint Gestione_Parco_FK foreign key(nomeParco) references Parco(nomeParco),
+    constraint Gestione_Ente_FK foreign key(nomeEnte) references Ente(nomeEnte)
 );
 
 create table Riservare (
-    COD_fiscale char(16) foreign key(COD_fiscale) references Persona(COD_fiscale),
-    via varchar(10),
+    COD_fiscale char(16),
+    via varchar(20),
     cap int not null,
     numCivico int not null,
     dataPrenotazione date not null,
     numStanze int,
     stato text,
     constraint Riservare_PK primary key(COD_fiscale, via, cap, numCivico, dataPrenotazione),
-    constraint Riservare_fk_persona foreign key(COD_fiscale) references Persona(COD_fiscale),
-    constraint Riservare_fk_struttura foreign key(via, cap, numCivico) references Struttura_ricettiva(via, cap, numCivico)
+    constraint Riservare_Persona_FK foreign key(COD_fiscale) references Persona(COD_fiscale),
+    constraint Riservare_Struttura_FK foreign key(via, cap, numCivico) references Struttura_ricettiva(via, cap, numCivico)
 );
 
 create table Appartiene_a (
-    COD_fiscale char(16) foreign key(COD_fiscale) references Persona(COD_fiscale),
-    nomeGruppo varchar(20) foreign key(nomeGruppo) references Gruppo(nomeGruppo),
-    constraint Appartiene_a_PK primary key(COD_fiscale, nomeGruppo)
+    COD_fiscale char(16),
+    nomeGruppo varchar(20),
+    constraint Appartiene_a_PK primary key(COD_fiscale, nomeGruppo),
+    constraint Appartiene_a_Persona_FK foreign key(COD_fiscale) references Persona(COD_fiscale),
+    constraint Appartiene_a_Gruppo_FK foreign key(nomeGruppo) references Gruppo(nomeGruppo)
 );
