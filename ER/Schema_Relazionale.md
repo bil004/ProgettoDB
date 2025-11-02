@@ -12,13 +12,13 @@ Gruppo(**numGruppo(pk)**, tipo, totPartecipanti, classe)
 
 Struttura_ricettiva(**nome(pk)**, contatti, servizi, trattamenti, CETS, parcheggio, impiego_ecologico, numCivico, via, CAP)
 
-Utente(**username(pk)**, password, email, telefono)
+Utente(**username(pk)**, password, email, telefono, Utente_CODfiscale_FK)
 
 Tour(**nomeTour(pk)**, maxPartecipanti, data, ora, stato)
 
-Feedback(**idFeedback(pk)**, tipo, valutazione, commento, data, ora, autore)
+Feedback(**idFeedback(pk)**, tipo, valutazione, commento, data, ora, autore, Feedback_Tragitto_FK)
 
-Calendario(**idCalendario(pk)**, data, oraInizio, oraFine, note)
+Calendario(**idCalendario(pk)**, data, oraInizio, oraFine, note, Calendario_Guida_FK)
 
 Guida(**numTesserino(pk)**, nome, campo, licenza)
 
