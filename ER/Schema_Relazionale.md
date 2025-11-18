@@ -1,28 +1,28 @@
 Parco(**nomeParco(pk)**, descrizione, superficie, regione, accessibile, tipo)
 
-Centro_visita(**nomeCentro(pk)**, servizi, note, orarioApertura, orarioChiusura, telefono, email, numCivico, via, CAP)
+Centro_visita(**nomeCentro(pk)**, servizi, note, orarioApertura, orarioChiusura, telefono, email, indirizzo)
 
 Ente(**nomeEnte(pk)**, CETS)
 
 News(**data(pk)**, titolo(pk), foto, testo, autore)
 
-Persona(**COD_fiscale(pk)**, nome, cognome, dataNascita, tipo)
+Persona(**COD_fiscale(pk)**, nome, cognome, dataNascita, tipo, _nomeGruppo_)
 
 Gruppo(**numGruppo(pk)**, tipo, totPartecipanti, classe)
 
-Struttura_ricettiva(**nome(pk)**, contatti, servizi, trattamenti, CETS, parcheggio, impiego_ecologico, numCivico, via, CAP)
+Struttura_ricettiva(**numCivico(pk)**, **via(pk)**, **CAP(pk)**, contatti, servizi, trattamenti, CETS*, parcheggio, impiego_ecologico)
 
-Utente(**username(pk)**, password, email, telefono, Utente_CODfiscale_FK)
+Utente(**username(pk)**, password, email, telefono, _CODfiscale_)
 
 Tour(**nomeTour(pk)**, maxPartecipanti, data, ora, stato)
 
 Feedback(**idFeedback(pk)**, tipo, valutazione, commento, data, ora, autore, Feedback_Tragitto_FK)
 
-Calendario(**idCalendario(pk)**, data, oraInizio, oraFine, note, Calendario_Guida_FK)
+Calendario(**idCalendario(pk)**, data, oraInizio, oraFine, note)
 
 Guida(**numTesserino(pk)**, nome, campo, licenza)
 
-Tragitto(**idTragitto(pk)**, durata, nomeTragitto, punto_partenza, difficolta, descrizione)
+Tragitto(**idTragitto(pk)**, durata, nomeTragitto, punto_partenza, difficolta, descrizione, tipo)
 
 ---
 
