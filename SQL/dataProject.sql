@@ -16,8 +16,8 @@ insert into Parco values
 
 -- GRUPPO
 insert into Gruppo values
-('Classe3A', 'Scolastico', 25, '3A'),
-('TrekkingClub', 'Amatoriale', 12, null);
+('Classe3A', 'Scolastico', '3A'),
+('TrekkingClub', 'Amatoriale', null);
 
 -- UTENTE
 insert into Utente values

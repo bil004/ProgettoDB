@@ -48,7 +48,6 @@ CREATE TABLE TOUR (
 CREATE TABLE GRUPPO (
     nomeGruppo VARCHAR(255) NOT NULL,
     tipo VARCHAR(255) NOT NULL,
-    totPartecipanti INTEGER NOT NULL,
     classe VARCHAR(255),
     PRIMARY KEY (nomeGruppo)
 );
