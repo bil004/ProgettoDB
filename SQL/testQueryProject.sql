@@ -97,6 +97,7 @@ WHERE e.CETS = true;
 
 
 -- 8️⃣ Vincoli e integrità
+-- VERIFICA DI COERENZA
 SELECT * FROM Feedback
 WHERE (anonimo = true AND UTENTE_username IS NOT NULL)
    OR (anonimo = false AND UTENTE_username IS NULL);
@@ -105,4 +106,10 @@ SELECT *
 FROM Riservare r
 WHERE (r.STRUTTURA_RICETTIVA_Via, r.STRUTTURA_RICETTIVA_CAP, r.STRUTTURA_RICETTIVA_numCivico) NOT IN (
   SELECT Via, CAP, numCivico FROM Struttura_ricettiva
-);
+
+
+-- VERIFICA DI VIOLAZIONE ATTIVA
+DELETE FROM PARCO WHERE nomeParco = 'Gran Paradiso';
+
+INSERT INTO Feedback (TRAGITTI_nomeTragitto, data, ora, valutazione, commento, tipo, UTENTE_username, anonimo)
+VALUES ('SentieroLago', '2025-12-01', '10:00:00', 1, 'Fake', 'Negativo', 'utente_inesistente_99', false);
