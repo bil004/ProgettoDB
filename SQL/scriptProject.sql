@@ -34,7 +34,7 @@ CREATE TABLE TRAGITTI (
     punto_partenza VARCHAR(255) NOT NULL,
     difficolta INTEGER NOT NULL,
     descrizione TEXT NOT NULL,
-    Type VARCHAR(255) NOT NULL,
+    tipo VARCHAR(255) NOT NULL,
     PRIMARY KEY (nomeTragitto)
 );
 CREATE TABLE TOUR (
@@ -81,7 +81,7 @@ CREATE TABLE PERSONA (
     cognome VARCHAR(255) NOT NULL,
     nome VARCHAR(255) NOT NULL,
     dataNascita DATE NOT NULL,
-    Type VARCHAR(255) NOT NULL,
+    tipo VARCHAR(255) NOT NULL,
     GRUPPO_nomeGruppo VARCHAR(255),
     PRIMARY KEY (COD_fiscale),
     FOREIGN KEY (GRUPPO_nomeGruppo) REFERENCES GRUPPO (nomeGruppo)

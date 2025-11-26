@@ -5,7 +5,7 @@
 -- 1️⃣ Query base
 SELECT * FROM Persona;
 
-SELECT u.username, u.email, p.nome, p.cognome, p.type
+SELECT u.username, u.email, p.nome, p.cognome, p.tipo
 FROM Utente u
 JOIN Persona p ON p.COD_fiscale = u.PERSONA_COD_fiscale;
 
@@ -30,7 +30,7 @@ FROM Tour t
 JOIN Include i ON t.nomeTour = i.TOUR_nomeTour
 JOIN Tragitti tr ON i.TRAGITTI_nomeTragitto = tr.nomeTragitto;
 
-SELECT g.numTesserino, g.campo, tr.nomeTragitto, tr.type
+SELECT g.numTesserino, g.campo, tr.nomeTragitto, tr.tipo
 FROM Guida g
 JOIN Svolge s ON g.numTesserino = s.GUIDA_numTesserino
 JOIN Tragitti tr ON s.TRAGITTI_nomeTragitto = tr.nomeTragitto;
