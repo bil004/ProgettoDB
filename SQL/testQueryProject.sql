@@ -97,6 +97,7 @@ WHERE e.CETS = true;
 
 
 -- 8️⃣ Vincoli e integrità
+
 -- VERIFICA DI COERENZA
 SELECT * FROM Feedback
 WHERE (anonimo = true AND UTENTE_username IS NOT NULL)
@@ -105,7 +106,8 @@ WHERE (anonimo = true AND UTENTE_username IS NOT NULL)
 SELECT *
 FROM Riservare r
 WHERE (r.STRUTTURA_RICETTIVA_Via, r.STRUTTURA_RICETTIVA_CAP, r.STRUTTURA_RICETTIVA_numCivico) NOT IN (
-  SELECT Via, CAP, numCivico FROM Struttura_ricettiva;
+  SELECT Via, CAP, numCivico FROM Struttura_ricettiva);
+
 
 
 -- VERIFICA DI VIOLAZIONE ATTIVA
