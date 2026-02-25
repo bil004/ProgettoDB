@@ -1,3 +1,5 @@
+## Relazioni
+
 Parco(**nomeParco(pk)**, descrizione, superficie, regione, accessibile, tipo)
 
 Centro_visita(**nomeCentro(pk)**, servizi, note, orarioApertura, orarioChiusura, telefono, email, indirizzo)
@@ -24,9 +26,9 @@ Guida(**numTesserino(pk)**, nome, campo, licenza)
 
 Tragitto(**idTragitto(pk)**, durata, nomeTragitto, punto_partenza, difficolta, descrizione, tipo)
 
----
+<br><br>
 
--- Relazioni di associazione (logico)
+## Relazioni di associazione (logico)
 
 Visita(**nomeParco(pk)**, **COD_fiscale(pk)**, data, oraInizio, oraFine)
 
